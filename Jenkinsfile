@@ -4,6 +4,7 @@ pipeline {
     agent any
     parameters {
     // 2.variables for the parametrized execution of the test: Text and options
+        booleanParam(name:'refresh',defaultValue:false,description:'read Jenkinsfile and refresh then exit.')
         choice(choices: 'yes\nno', description: 'Are you sure you want to execute this test?', name: 'run_test_only')
         choice(choices: 'yes\nno', description: 'Archived war?', name: 'archive_war')
         string(defaultValue: "your.email@gmail.com", description: 'email for notifications', name: 'notification_email')
@@ -16,7 +17,19 @@ pipeline {
     }
     //4. Stages
     stages {
-        stage('SVN') {
+        stage('Read Jenkinsfile'){
+            when{
+                expression { return parameters.refresh == true }
+            }
+            steps{
+                echo('end pipeline and refresh Jenkinsfile')
+            }
+        }
+        stages('Run Jenkinsfile'){
+            when {
+                expression { return parameters.refresh == false }
+            }
+                    stage('SVN') {
             steps {
                 echo 'Check out ..'
                 checkout([
@@ -49,8 +62,8 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
-
-            
         }
+        }
+
     }
 }
