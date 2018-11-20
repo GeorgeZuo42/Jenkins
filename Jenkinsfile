@@ -25,7 +25,7 @@ pipeline {
                 echo('end pipeline and refresh Jenkinsfile')
             }
         }
-        stage('Run Jenkinsfile'){
+        stages('Run Jenkinsfile'){
             when {
                 expression { return parameters.refresh == false }
             }
