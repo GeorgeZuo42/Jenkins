@@ -20,7 +20,13 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo "${params.Greeting} World!"
+                when {
+                    expression { return params.refresh }
+                }
+                steps{
+                    echo "${params.Greeting} World!"
+                }
+
             }
         }
 //        stage('Read Jenkinsfile') {
