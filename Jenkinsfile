@@ -20,7 +20,7 @@ pipeline {
 
         stage('Read Jenkinsfile') {
             when {
-                expression { return parameters.refresh == true }
+                expression { return ${params.refresh} }
             }
             steps {
                 echo 'Check Update'
@@ -75,15 +75,5 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-
-//        } catch (e) {
-//            if (parameters.refresh == true) {
-//                currentBuild.result = 'ABORTED'
-//                return
-//            }
-//            throw e
-//        }
     }
-
-
 }
