@@ -34,6 +34,11 @@ pipeline {
                     currentBuild.result = 'ABORTED'
                     error('ABORTED')
                 }
+                post {
+                    aborted {
+                        echo 'Aborted'
+                    }
+                }
             }
         }
         stage('SVN') {
@@ -79,10 +84,6 @@ pipeline {
 //            throw e
 //        }
     }
-    post {
-        aborted {
-            echo 'Aborted'
-        }
-    }
+
 
 }
