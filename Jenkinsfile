@@ -20,10 +20,13 @@ pipeline {
 
     try {
         stage('Read Jenkinsfile') {
-            when {
-                expression { return parameters.refresh == true }
-            }
-            steps {
+//            when {
+//                expression { return parameters.refresh == true }
+//            }
+//            steps {
+//                error('Refresh Jenkinsfile.')
+//            }
+            if (parameters.refresh) {
                 error('Refresh Jenkinsfile.')
             }
         }
