@@ -19,13 +19,11 @@ pipeline {
     stages {
         try {
             stage('Read Jenkinsfile') {
-//            when {
-//                expression { return parameters.refresh == true }
-//            }
-//            steps {
-//                error('Refresh Jenkinsfile.')
-//            }
-                if (parameters.refresh) {
+                when {
+                    expression { return parameters.refresh == true }
+                }
+                steps {
+                    currentBuild.result = 'ABORTED'
                     error('Refresh Jenkinsfile.')
                 }
             }
