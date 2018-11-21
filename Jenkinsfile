@@ -9,7 +9,7 @@ pipeline {
         choice(choices: 'yes\nno', description: 'Archived war?', name: 'archive_war')
         string(defaultValue: "your.email@gmail.com", description: 'email for notifications', name: 'notification_email')
     }
-    //3. Environment variablesÎ
+    //3. Environment variables
     environment {
         firstEnvVar = 'FIRST_VAR'
         secondEnvVar = 'SECOND_VAR'
@@ -23,7 +23,6 @@ pipeline {
                 expression { return parameters.refresh == true }
             }
             steps {
-                currentBuild.result = 'ABORTED'
                 error('Refresh Jenkinsfile.')
             }
         }
