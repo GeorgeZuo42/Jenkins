@@ -23,16 +23,17 @@ pipeline {
                 expression { return parameters.refresh == true }
             }
             steps {
-                script {
-                    try {
-                        error()
-                    }
-                    catch (e){
-                        echo 'ABORTED'
-                        return
-                    }
-
-                }
+                echo 'Check Update'
+//                script {
+//                    try {
+//                        error()
+//                    }
+//                    catch (e){
+//                        echo 'ABORTED'
+//                        return
+//                    }
+//
+//                }
 //                post {
 //                    aborted {
 //                        echo 'Aborted'
