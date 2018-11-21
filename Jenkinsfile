@@ -1,4 +1,4 @@
-// Jenkinsfile (Declarative Pipeline)
+// Jenkinsfile (Scripted Pipeline)
 pipeline {
     // 1. runs in any agent, otherwise specify a slave node
     agent any
@@ -23,7 +23,11 @@ pipeline {
                 expression { return parameters.refresh == true }
             }
             steps {
-                throw new Exception('Refresh Jenkinsfile.')
+                script {
+//                    throw new Exception('Refresh Jenkinsfile.')
+                    currentBuild.result = 'ABORTED'
+                    error()
+                }
             }
         }
         stage('SVN') {
