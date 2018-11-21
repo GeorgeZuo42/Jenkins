@@ -24,21 +24,20 @@ pipeline {
             }
             steps {
                 script {
-//                    try {
-//                        error()
-//                    }
-//                    catch (e){
-//
-//                    }
-//                    throw new Exception('Refresh Jenkinsfile.')
-                    currentBuild.result = 'ABORTED'
-                    error('ABORTED')
-                }
-                post {
-                    aborted {
-                        echo 'Aborted'
+                    try {
+                        error()
                     }
+                    catch (e){
+                        echo 'ABORTED'
+                        return
+                    }
+
                 }
+//                post {
+//                    aborted {
+//                        echo 'Aborted'
+//                    }
+//                }
             }
         }
         stage('SVN') {
