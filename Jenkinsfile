@@ -23,7 +23,7 @@ pipeline {
                 expression { return parameters.refresh == true }
             }
             steps {
-                error('Refresh Jenkinsfile.')
+                throw new Exception('Refresh Jenkinsfile.')
             }
         }
         stage('SVN') {
