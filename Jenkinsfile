@@ -25,6 +25,10 @@ pipeline {
             }
             steps {
                 echo "${params.Greeting} World!"
+                script {
+                    currentBuild.result = 'ABORTED'
+                    error()
+                }
             }
 
 
