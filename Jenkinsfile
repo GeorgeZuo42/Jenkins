@@ -8,7 +8,6 @@ pipeline {
         choice(choices: 'yes\nno', description: 'Are you sure you want to execute this test?', name: 'run_test_only')
         choice(choices: 'yes\nno', description: 'Archived war?', name: 'archive_war')
         string(defaultValue: "your.email@gmail.com", description: 'email for notifications', name: 'notification_email')
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
     }
     //3. Environment variables
     environment {
@@ -24,38 +23,15 @@ pipeline {
                 expression { return params.refresh }
             }
             steps {
-                echo "${params.Greeting} World!"
+                echo "${params.refresh} World!"
                 script {
                     currentBuild.result = 'ABORTED'
-                    error()
+                    error(ABORTED)
                 }
             }
 
 
         }
-//        stage('Read Jenkinsfile') {
-//            when {
-//                expression { return ${params.refresh} }
-//            }
-//            steps {
-//                echo 'Check Update'
-////                script {
-////                    try {
-////                        error()
-////                    }
-////                    catch (e){
-////                        echo 'ABORTED'
-////                        return
-////                    }
-////
-////                }
-////                post {
-////                    aborted {
-////                        echo 'Aborted'
-////                    }
-////                }
-//            }
-//        }
         stage('SVN') {
             steps {
                 echo 'Check out ..'
