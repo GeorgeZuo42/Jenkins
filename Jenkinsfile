@@ -24,9 +24,15 @@ pipeline {
             }
             steps {
                 script {
+//                    try {
+//                        error()
+//                    }
+//                    catch (e){
+//
+//                    }
 //                    throw new Exception('Refresh Jenkinsfile.')
                     currentBuild.result = 'ABORTED'
-                    error()
+                    error('ABORTED')
                 }
             }
         }
