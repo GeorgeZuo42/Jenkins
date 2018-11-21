@@ -1,4 +1,4 @@
-// Jenkinsfile (Scripted Pipeline)
+// Jenkinsfile (Declarative Pipeline)
 pipeline {
     // 1. runs in any agent, otherwise specify a slave node
     agent any
@@ -17,20 +17,23 @@ pipeline {
     }
     //4. Stages
     stages {
-        stage('Example') {
-
-            when {
-                expression { return params.refresh }
-            }
-            steps {
-                echo "${params.refresh} World!"
-                script {
-                    currentBuild.result = 'ABORTED'
-                    error('ABORTED')
+        stage('CheckJenkins') {
+//            when {
+//                expression { return params.refresh }
+//            }
+            input {
+                message "是否需要更新Jenkins配置?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
                 }
             }
-
-
+            steps {
+                script {
+                    currentBuild.result = 'ABORTED'
+                    error('Aborted by update')
+                }
+            }
         }
         stage('SVN') {
             steps {
