@@ -30,12 +30,6 @@ pipeline {
                 }
             }
         }
-        post {
-            abort {
-                echo 'Aborted'
-                return
-            }
-        }
         stage('SVN') {
             steps {
                 echo 'Check out ..'
@@ -79,6 +73,10 @@ pipeline {
 //            throw e
 //        }
     }
-
+    post {
+        aborted {
+            echo 'Aborted'
+        }
+    }
 
 }
