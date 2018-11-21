@@ -26,7 +26,7 @@ pipeline {
                 echo "${params.refresh} World!"
                 script {
                     currentBuild.result = 'ABORTED'
-                    error(ABORTED)
+                    error('ABORTED')
                 }
             }
 
