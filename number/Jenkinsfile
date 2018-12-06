@@ -4,7 +4,7 @@ pipeline {
     agent {
         label {
             label ""
-            customWorkspace '/Users/eyugame/Projects/eyugame/excelroot2/trunk-number'
+            customWorkspace '/Users/eyugame/Projects/eyugame/excelroot/trunk-number'
         }
     }
 
