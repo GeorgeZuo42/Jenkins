@@ -83,6 +83,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
+                    echo ${env.BUILD_NUMBER}
                     echo ${env.LocalizedName}
                     '''
 //                    ansiColor('xterm') {
