@@ -70,8 +70,7 @@ pipeline {
                             LocalizedName = "$c_name"
                         }
                     }
-                    sh '''
-                    set +x
+                    sh '''#!/bin/bash -xe
                     #必须先声明
                     echo $name
                     
