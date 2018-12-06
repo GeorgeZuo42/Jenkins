@@ -75,8 +75,8 @@ pipeline {
                     sh '''#!/bin/bash -xe
                     #必须先声明
                     echo $name
-                    echo ${env.BUILD_NUMBER}
-                    echo ${env.LocalizedName}
+                    echo "${env.BUILD_NUMBER}"
+                    echo "${env.LocalizedName}"
 //                    out_path=$(pwd)/lua
 //                    if [ -e $out_path ]; then
 //                      rm -rf $out_path/*
