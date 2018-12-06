@@ -10,7 +10,7 @@ pipeline {
 
     parameters {
         // 2.variables for the parametrized execution of the test: Text and options
-        booleanParam(name: 'refresh', defaultValue: false, description: 'read Jenkinsfile and refresh then exit.')
+//        booleanParam(name: 'refresh', defaultValue: false, description: 'read Jenkinsfile and refresh then exit.')
         string(name: 'name', defaultValue: 'test')
     }
     //3. Environment variables
@@ -19,17 +19,17 @@ pipeline {
     }
     //4. Stages
     stages {
-        stage('CheckJenkins') {
-            when {
-                expression { return params.refresh }
-            }
-            steps {
-                script {
-                    currentBuild.result = 'ABORTED'
-                    error('Aborted by update')
-                }
-            }
-        }
+//        stage('CheckJenkins') {
+//            when {
+//                expression { return params.refresh }
+//            }
+//            steps {
+//                script {
+//                    currentBuild.result = 'ABORTED'
+//                    error('Aborted by update')
+//                }
+//            }
+//        }
         stage('SVN') {
             steps {
                 echo 'Update SVN..'
