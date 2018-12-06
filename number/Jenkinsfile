@@ -1,8 +1,13 @@
 // Jenkinsfile (Declarative Pipeline)
 pipeline {
     // 1. runs in any agent, otherwise specify a slave node
-    agent any
-    customWorkspace '/Users/eyugame/Projects/eyugame/excelroot2/trunk-number'
+    agent {
+        node {
+            label 'excel-root'
+            customWorkspace '/Users/eyugame/Projects/eyugame/excelroot2/trunk-number'
+        }
+    }
+
     parameters {
         // 2.variables for the parametrized execution of the test: Text and options
         booleanParam(name: 'refresh', defaultValue: false, description: 'read Jenkinsfile and refresh then exit.')
