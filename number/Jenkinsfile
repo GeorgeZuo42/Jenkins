@@ -57,7 +57,7 @@ pipeline {
 //                    sh 'pwd'
 //                }
                 script {
-                    def props = readJSON file: './name.json'
+                    def props = readJSON file: '${env.WORKSPACE}/name.json'
                     echo props['$name']
                 }
                 sh '''
