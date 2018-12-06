@@ -58,7 +58,7 @@ pipeline {
 //                }
                 script {
                     def props = readJSON file: "${env.WORKSPACE}/name.json"
-                    echo props["$name"]
+                    echo props["cxl"]
                 }
                 sh '''
                 set +x
