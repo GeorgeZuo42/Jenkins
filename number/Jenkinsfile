@@ -61,7 +61,7 @@ pipeline {
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
                         namelist = readJSON file: "name.json"
-                        c_name= namelist[$name]
+                        c_name= namelist["$name"]
                     }
                     sh '''
                     set +x
