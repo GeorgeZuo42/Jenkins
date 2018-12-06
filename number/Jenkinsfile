@@ -55,8 +55,8 @@ pipeline {
         }
 
         stage('Export Excel') {
-            echo "开始导表"
             steps {
+                echo "开始导表"
                 script {
                     def props = readJSON file: "${env.WORKSPACE}/$CheckOutDir/name.json"
                     echo props["cxl"]
