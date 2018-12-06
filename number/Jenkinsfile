@@ -76,23 +76,23 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-    
+                    echo props[$name]
                     '''
-                    ansiColor('xterm') {
-                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
-                    }
-                    sh '''
-                    cd lua
-    
-                    export LC_ALL=en_US.UTF-8
-                    export LANG=en_US.UTF-8
-    
-                    svn add . --no-ignore --force
-                    svn ci . -m "Auto Commit By $c_name"
-    
-                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
-                    svn ci . -m "Auto Commit By $c_name, Remove Files"
-                    '''
+//                    ansiColor('xterm') {
+//                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
+//                    }
+//                    sh '''
+//                    cd lua
+//
+//                    export LC_ALL=en_US.UTF-8
+//                    export LANG=en_US.UTF-8
+//
+//                    svn add . --no-ignore --force
+//                    svn ci . -m "Auto Commit By $c_name"
+//
+//                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
+//                    svn ci . -m "Auto Commit By $c_name, Remove Files"
+//                    '''
                 }
 
 
@@ -110,7 +110,7 @@ pipeline {
         stage('Set Name') {
             steps {
                 script {
-                    currentBuild.displayName = "props[$name]"
+                    currentBuild.displayName = props[$name]
 //                    currentBuild.description = "The best description."
                 }
             }
