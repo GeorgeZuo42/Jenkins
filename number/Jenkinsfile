@@ -75,18 +75,18 @@ pipeline {
                     sh '''#!/bin/bash -xe
                     #必须先声明
                     echo $name
-                    
-                    out_path=$(pwd)/lua
-                    if [ -e $out_path ]; then
-                      rm -rf $out_path/*
-                      echo "清理目录"
-                      echo $out_path/*
-                    else
-                      mkdir -p $out_path
-                      echo "创建目录"
-                    fi
                     echo ${env.BUILD_NUMBER}
                     echo ${env.LocalizedName}
+//                    out_path=$(pwd)/lua
+//                    if [ -e $out_path ]; then
+//                      rm -rf $out_path/*
+//                      echo "清理目录"
+//                      echo $out_path/*
+//                    else
+//                      mkdir -p $out_path
+//                      echo "创建目录"
+//                    fi
+
                     '''
                     script {
                         echo "12345"
