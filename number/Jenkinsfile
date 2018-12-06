@@ -17,7 +17,7 @@ pipeline {
     //3. Environment variables
     environment {
         CheckOutDir = 'number'
-        LocalizedName = ''
+        LocalizedName = 'init'
     }
     //4. Stages
     stages {
