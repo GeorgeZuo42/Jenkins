@@ -44,7 +44,7 @@ pipeline {
                                                           depthOption                 : 'infinity',
                                                           ignoreExternalsOption       : false,
                                                           local                       : 'number',
-                                                          remote                      : 'http://192.168.50.86/svn/slg/xfiles/trunk/number/']],
+                                                          remote                      : 'http://192.168.50.86/svn/slg/xfiles/trunk/number@HEAD']],
                          quietOperation        : true,
                          workspaceUpdater      : [$class: 'UpdateUpdater']])
             }
