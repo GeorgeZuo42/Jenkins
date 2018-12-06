@@ -59,8 +59,7 @@ pipeline {
                 echo "开始导表"
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
-                        def props = readJSON file: "${env.WORKSPACE}/$CheckOutDir/name.json"
-                        echo props["cxl"]
+                        def props = readJSON file: "name.json"
                     }
                     sh '''
                     set +x
@@ -78,7 +77,7 @@ pipeline {
                     fi
     
                     '''
-                    ansiColor('gnome-terminal') {
+                    ansiColor('xterm') {
                         sh '$(pwd)/Tools/Mac64/run-2lua.sh'
                     }
                     sh '''
