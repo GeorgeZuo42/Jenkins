@@ -1,4 +1,5 @@
 // Jenkinsfile (Declarative Pipeline)
+def c_name
 pipeline {
     // 1. runs in any agent, otherwise specify a slave node
     agent {
