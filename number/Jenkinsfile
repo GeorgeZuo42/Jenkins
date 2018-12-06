@@ -54,7 +54,7 @@ pipeline {
 
             steps {
                 script{
-                    def props = readJSON file: 'name.json'
+                    def props = readJSON file: '$WORKSPACE/name.json'
                     echo props['$name']
                 }
                 sh '''
