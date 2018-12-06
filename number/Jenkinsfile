@@ -69,7 +69,7 @@ pipeline {
                 fi
                 
                 '''
-                ansiColor('xterm') {
+                ansiColor('gnome-terminal') {
                     sh '$(pwd)/Tools/Mac64/run-2lua.sh'
                 }
 
