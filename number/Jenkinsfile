@@ -72,6 +72,12 @@ pipeline {
                         echo "${env.BUILD_NUMBER}"
                         echo "${env.LocalizedName}"
                     }
+                    script {
+                        echo "12345"
+                        echo "$c_name"
+                        echo "${env.BUILD_NUMBER}"
+                        echo "${env.LocalizedName}"
+                    }
                     sh '''#!/bin/bash -xe
                     #必须先声明
                     echo $name
@@ -88,10 +94,7 @@ pipeline {
 //                    fi
 
                     '''
-                    script {
-                        echo "12345"
-                        echo "$c_name"
-                    }
+
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
 //                    }
