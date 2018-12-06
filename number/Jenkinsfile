@@ -3,7 +3,6 @@ pipeline {
     // 1. runs in any agent, otherwise specify a slave node
     agent {
         node {
-            label 'excel-root'
             customWorkspace '/Users/eyugame/Projects/eyugame/excelroot2/trunk-number'
         }
     }
