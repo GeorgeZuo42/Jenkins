@@ -88,6 +88,10 @@ pipeline {
                     echo ${env.BUILD_NUMBER}
                     echo ${env.LocalizedName}
                     '''
+                    script {
+                        echo "12345"
+                        echo "$c_name"
+                    }
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
 //                    }
