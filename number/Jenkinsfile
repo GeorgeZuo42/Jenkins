@@ -53,8 +53,8 @@ pipeline {
         stage('Export Excel') {
 
             steps {
-                dir('$WORKSPACE') {
-                    sh 'echo $(pwd)'
+                dir($WORKSPACE) {
+                    sh 'pwd'
                 }
 
                 script{
