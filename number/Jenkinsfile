@@ -63,6 +63,7 @@ pipeline {
                     script {
                         namelist = readJSON file: "name.json"
                         c_name= namelist["$name"]
+                        echo ${c_name}
                     }
                     sh '''
                     set +x
@@ -78,7 +79,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-                    echo $c_name
+                    echo ${c_name}
                     '''
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
