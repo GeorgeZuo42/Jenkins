@@ -88,10 +88,10 @@ pipeline {
                     export LANG=en_US.UTF-8
 
                     svn add . --no-ignore --force
-                    svn ci . -m "Auto Commit By $c_name"
+                    svn ci . -m "Auto Commit By ${LocalizedName}"
 
                     svn st | grep ^! | awk '{print $2}' | xargs svn rm
-                    svn ci . -m "Auto Commit By $c_name, Remove Files"
+                    svn ci . -m "Auto Commit By ${LocalizedName}, Remove Files"
                     '''
                 }
             }
