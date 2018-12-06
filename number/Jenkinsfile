@@ -53,8 +53,13 @@ pipeline {
         stage('Export Excel') {
 
             steps {
+                dir('$WORKSPACE') {
+                    sh 'echo $(pwd)'
+                }
+
                 script{
-                    def props = readJSON file: '$WORKSPACE/name.json'
+
+                    def props = readJSON file: 'name.json'
                     echo props['$name']
                 }
                 sh '''
