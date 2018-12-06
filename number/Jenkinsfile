@@ -66,10 +66,11 @@ pipeline {
                         c_name= namelist["$name"]
                         echo "$c_name"
                         echo "fuck"
-//                        environment {
-//                            LocalizedName = "$c_name"
-//                        }
-                        env.LocalizedName = "$c_name"
+                        environment {
+                            LocalizedName = "22222"
+                        }
+                        echo "${env.LocalizedName}"
+                        env.LocalizedName = "33333"
                         echo "${env.BUILD_NUMBER}"
                         echo "${env.LocalizedName}"
                     }
