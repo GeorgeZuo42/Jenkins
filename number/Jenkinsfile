@@ -63,9 +63,9 @@ pipeline {
                     script {
                         namelist = readJSON file: "name.json"
                         echo namelist["$name"]
-                        echo namelist[$name]
                         c_name= namelist["$name"]
-                        echo $c_name
+                        echo "$c_name"
+                        echo "fuck"
                     }
                     sh '''
                     set +x
