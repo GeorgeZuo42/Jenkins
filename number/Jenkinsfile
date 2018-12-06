@@ -1,0 +1,73 @@
+// Jenkinsfile (Declarative Pipeline)
+pipeline {
+    // 1. runs in any agent, otherwise specify a slave node
+    agent any
+    parameters {
+        // 2.variables for the parametrized execution of the test: Text and options
+        booleanParam(name: 'refresh', defaultValue: false, description: 'read Jenkinsfile and refresh then exit.')
+    }
+    //3. Environment variables
+    environment {
+        firstEnvVar = 'FIRST_VAR'
+        secondEnvVar = 'SECOND_VAR'
+        thirdEnvVar = 'THIRD_VAR'
+    }
+    //4. Stages
+    stages {
+        stage('CheckJenkins') {
+            when {
+                expression { return params.refresh }
+            }
+            steps {
+                script {
+                    currentBuild.result = 'ABORTED'
+                    error('Aborted by update')
+                }
+            }
+        }
+        stage('SVN') {
+            steps {
+                echo 'Update SVN..'
+                checkout(
+                        [$class                : 'SubversionSCM',
+                         additionalCredentials : [],
+                         excludedCommitMessages: '',
+                         excludedRegions       : '',
+                         excludedRevprop       : '',
+                         excludedUsers         : '',
+                         filterChangelog       : false,
+                         ignoreDirPropChanges  : false,
+                         includedRegions       : '',
+                         locations             : [[
+                                                          cancelProcessOnExternalsFail: true,
+                                                          credentialsId               : '608ff627-0cc7-4cf0-9db4-83ab4521d410',
+                                                          depthOption                 : 'infinity',
+                                                          ignoreExternalsOption       : false,
+                                                          local                       : '.',
+                                                          remote                      : 'http://192.168.50.86/svn/slg/xfiles/trunk/number@HEAD']],
+                         quietOperation        : true,
+                         workspaceUpdater      : [$class: 'UpdateUpdater']])
+            }
+        }
+
+        stage('Export Excel') {
+            steps {
+                sh '''
+                set +x
+                echo "开始导表"
+                #必须先声明
+                echo $name
+
+                '''
+            }
+        }
+        stage('Set Name') {
+            steps {
+                script {
+                    currentBuild.displayName = "The name."
+                    currentBuild.description = "The best description."
+                }
+            }
+        }
+    }
+}
