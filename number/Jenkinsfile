@@ -17,6 +17,7 @@ pipeline {
     //3. Environment variables
     environment {
         CheckOutDir = 'number'
+        LocalizedName = ''
     }
     //4. Stages
     stages {
@@ -62,10 +63,12 @@ pipeline {
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
                         namelist = readJSON file: "name.json"
-                        echo namelist["$name"]
                         c_name= namelist["$name"]
                         echo "$c_name"
                         echo "fuck"
+                        environment {
+                            LocalizedName = "$c_name"
+                        }
                     }
                     sh '''
                     set +x
@@ -81,7 +84,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-                    echo "$c_name"
+                    echo "${env.LocalizedName}"
                     '''
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
