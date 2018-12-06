@@ -64,34 +64,35 @@ pipeline {
                         env.LocalizedName = namelist["$name"]
                         echo "${env.LocalizedName}"
                     }
-                    sh '''#!/bin/bash -xe
-                    #必须先声明
-                    out_path=$(pwd)/lua
-                    if [ -e $out_path ]; then
-                      rm -rf $out_path/*
-                      echo "清理目录"
-                      echo $out_path/*
-                    else
-                      mkdir -p $out_path
-                      echo "创建目录"
-                    fi
-
+                    sh '''
+                        set +x
+                        out_path=$(pwd)/lua
+                        if [ -e $out_path ]; then
+                          rm -rf $out_path/*
+                          echo "清理目录"
+                          echo $out_path/*
+                        else
+                          echo "创建目录"
+                          mkdir -p $out_path
+                        fi
+    
                     '''
 
                     ansiColor('xterm') {
                         sh '$(pwd)/Tools/Mac64/run-2lua.sh'
                     }
+
                     sh '''
-                    cd lua
-
-                    export LC_ALL=en_US.UTF-8
-                    export LANG=en_US.UTF-8
-
-                    svn add . --no-ignore --force
-                    svn ci . -m "Auto Commit By ${LocalizedName}"
-
-                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
-                    svn ci . -m "Auto Commit By ${LocalizedName}, Remove Files"
+                        cd lua
+    
+                        export LC_ALL=en_US.UTF-8
+                        export LANG=en_US.UTF-8
+    
+                        svn add . --no-ignore --force
+                        svn ci . -m "Auto Commit By ${LocalizedName}"
+    
+                        svn st | grep ^! | awk '{print $2}' | xargs svn rm
+                        svn ci . -m "Auto Commit By ${LocalizedName}, Remove Files"
                     '''
                 }
             }
