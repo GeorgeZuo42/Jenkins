@@ -60,7 +60,7 @@ pipeline {
                 echo "开始导表"
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
-                        def props = readJSON file: "name.json"
+                        namelist = readJSON file: "name.json"
                     }
                     sh '''
                     set +x
@@ -76,7 +76,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-                    echo props[$name]
+                    echo namelist[$name]
                     '''
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
