@@ -49,7 +49,7 @@ pipeline {
                                                           credentialsId               : '608ff627-0cc7-4cf0-9db4-83ab4521d410',
                                                           depthOption                 : 'infinity',
                                                           ignoreExternalsOption       : false,
-                                                          local                       : '.',
+                                                          local                       : '',
                                                           remote                      : 'http://192.168.50.86/svn/slg/xfiles/trunk/number@HEAD']],
                          quietOperation        : true,
                          workspaceUpdater      : [$class: 'UpdateUpdater']])
