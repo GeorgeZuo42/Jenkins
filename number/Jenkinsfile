@@ -63,7 +63,7 @@ pipeline {
 //                    sh 'pwd'
 //                }
                 script {
-                    def props = readJSON file: "${env.WORKSPACE}/name.json"
+                    def props = readJSON file: "${env.WORKSPACE}/number/name.json"
                     echo props["cxl"]
                 }
 //                sh '''
