@@ -83,7 +83,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-                    echo "${env.LocalizedName}"
+                    echo ${env.LocalizedName}
                     '''
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
