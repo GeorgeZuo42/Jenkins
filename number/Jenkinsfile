@@ -43,7 +43,7 @@ pipeline {
                                                           credentialsId               : '608ff627-0cc7-4cf0-9db4-83ab4521d410',
                                                           depthOption                 : 'infinity',
                                                           ignoreExternalsOption       : false,
-                                                          local                       : 'number',
+                                                          local                       : '.',
                                                           remote                      : 'http://192.168.50.86/svn/slg/xfiles/trunk/number@HEAD']],
                          quietOperation        : true,
                          workspaceUpdater      : [$class: 'UpdateUpdater']])
@@ -57,7 +57,7 @@ pipeline {
 //                    sh 'pwd'
 //                }
                 script {
-                    def props = readJSON file: "${env.WORKSPACE}/number//name.json"
+                    def props = readJSON file: "${env.WORKSPACE}/name.json"
                     echo props["cxl"]
                 }
 //                sh '''
