@@ -61,6 +61,7 @@ pipeline {
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
                         namelist = readJSON file: "name.json"
+                        c_name= namelist[$name]
                     }
                     sh '''
                     set +x
@@ -76,7 +77,7 @@ pipeline {
                       mkdir -p $out_path
                       echo "创建目录"
                     fi
-                    echo namelist[$name]
+                    echo $c_name
                     '''
 //                    ansiColor('xterm') {
 //                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
@@ -98,15 +99,15 @@ pipeline {
 
             }
         }
-        stage('Update Server') {
-            steps {
-                echo "更新服务器"
-                script {
-                    sh 'curl -sS --request PUT http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-                    sh 'curl -sS --request POST http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-                }
-            }
-        }
+//        stage('Update Server') {
+//            steps {
+//                echo "更新服务器"
+//                script {
+//                    sh 'curl -sS --request PUT http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+//                    sh 'curl -sS --request POST http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+//                }
+//            }
+//        }
         stage('Set Name') {
             steps {
                 script {
