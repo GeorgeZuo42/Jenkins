@@ -1,5 +1,4 @@
 // Jenkinsfile (Declarative Pipeline)
-def c_name
 pipeline {
     // 1. runs in any agent, otherwise specify a slave node
     agent {
@@ -17,7 +16,6 @@ pipeline {
     //3. Environment variables
     environment {
         CheckOutDir = 'number'
-//        LocalizedName = 'init'
     }
     //4. Stages
     stages {
@@ -63,76 +61,57 @@ pipeline {
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     script {
                         namelist = readJSON file: "name.json"
-                        c_name= namelist["$name"]
-                        echo "$c_name"
-                        echo "fuck"
-                        environment {
-                            LocalizedName = "22222"
-                        }
-                        echo "${env.LocalizedName}"
-                        env.LocalizedName = "33333"
-                        echo "${env.BUILD_NUMBER}"
-                        echo "${env.LocalizedName}"
-                    }
-                    script {
-                        echo "12345"
-                        echo "$c_name"
-                        echo "${env.BUILD_NUMBER}"
+                        env.LocalizedName = namelist["$name"]
                         echo "${env.LocalizedName}"
                     }
                     sh '''#!/bin/bash -xe
                     #必须先声明
-                    echo "$c_name"
-                    echo "${BUILD_NUMBER}"
-                    echo "${LocalizedName}"
-//                    out_path=$(pwd)/lua
-//                    if [ -e $out_path ]; then
-//                      rm -rf $out_path/*
-//                      echo "清理目录"
-//                      echo $out_path/*
-//                    else
-//                      mkdir -p $out_path
-//                      echo "创建目录"
-//                    fi
+                    out_path=$(pwd)/lua
+                    if [ -e $out_path ]; then
+                      rm -rf $out_path/*
+                      echo "清理目录"
+                      echo $out_path/*
+                    else
+                      mkdir -p $out_path
+                      echo "创建目录"
+                    fi
 
                     '''
 
-//                    ansiColor('xterm') {
-//                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
-//                    }
-//                    sh '''
-//                    cd lua
-//
-//                    export LC_ALL=en_US.UTF-8
-//                    export LANG=en_US.UTF-8
-//
-//                    svn add . --no-ignore --force
-//                    svn ci . -m "Auto Commit By $c_name"
-//
-//                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
-//                    svn ci . -m "Auto Commit By $c_name, Remove Files"
-//                    '''
+                    ansiColor('xterm') {
+                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
+                    }
+                    sh '''
+                    cd lua
+
+                    export LC_ALL=en_US.UTF-8
+                    export LANG=en_US.UTF-8
+
+                    svn add . --no-ignore --force
+                    svn ci . -m "Auto Commit By $c_name"
+
+                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
+                    svn ci . -m "Auto Commit By $c_name, Remove Files"
+                    '''
                 }
-
-
             }
         }
-//        stage('Update Server') {
-//            steps {
-//                echo "更新服务器"
-//                script {
-//                    sh 'curl -sS --request PUT http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-//                    sh 'curl -sS --request POST http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-//                }
-//            }
-//        }
-//        stage('Set Name') {
-//            steps {
-//                script {
-//                    currentBuild.displayName = props[$name]
-////                    currentBuild.description = "The best description."
-//                }
-//            }
-//        }
+        stage('Update Server') {
+            steps {
+                echo "更新服务器"
+                script {
+                    sh 'curl -sS --request PUT http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+                    sh 'curl -sS --request POST http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+                }
+            }
+        }
+        stage('Set Name') {
+            steps {
+                script {
+                    currentBuild.displayName = "${env.LocalizedName}"
+//                    currentBuild.description = "The best description."
+                }
+            }
+        }
     }
 }
