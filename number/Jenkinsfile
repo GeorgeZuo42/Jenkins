@@ -108,7 +108,7 @@ pipeline {
         stage('Set Name') {
             steps {
                 script {
-                    currentBuild.displayName = "${env.LocalizedName}"
+                    currentBuild.displayName = "${env.BUILD_NUMBER} ${env.LocalizedName}"
 //                    currentBuild.description = "The best description."
                 }
             }
