@@ -57,41 +57,45 @@ pipeline {
         stage('Export Excel') {
             steps {
                 echo "开始导表"
-                script {
-                    def props = readJSON file: "${env.WORKSPACE}/$CheckOutDir/name.json"
-                    echo props["cxl"]
+                dir("${env.WORKSPACE}/$CheckOutDir") {
+                    script {
+                        def props = readJSON file: "${env.WORKSPACE}/$CheckOutDir/name.json"
+                        echo props["cxl"]
+                    }
+                    sh '''
+                    set +x
+                    #必须先声明
+                    echo $name
+                    
+                    out_path=$(pwd)/lua
+                    if [ -e $out_path ]; then
+                      rm -rf $out_path/*
+                      echo "清理目录"
+                      echo $out_path/*
+                    else
+                      mkdir -p $out_path
+                      echo "创建目录"
+                    fi
+    
+                    '''
+                    ansiColor('gnome-terminal') {
+                        sh '$(pwd)/Tools/Mac64/run-2lua.sh'
+                    }
+                    sh '''
+                    cd lua
+    
+                    export LC_ALL=en_US.UTF-8
+                    export LANG=en_US.UTF-8
+    
+                    svn add . --no-ignore --force
+                    svn ci . -m "Auto Commit By $c_name"
+    
+                    svn st | grep ^! | awk '{print $2}' | xargs svn rm
+                    svn ci . -m "Auto Commit By $c_name, Remove Files"
+                    '''
                 }
-                sh '''
-                set +x
-                #必须先声明
-                echo $name
-                
-                out_path=$(pwd)/lua
-                if [ -e $out_path ]; then
-                  rm -rf $out_path/*
-                  echo "清理目录"
-                  echo $out_path/*
-                else
-                  mkdir -p $out_path
-                  echo "创建目录"
-                fi
 
-                '''
-                ansiColor('gnome-terminal') {
-                    sh '$(pwd)/Tools/Mac64/run-2lua.sh'
-                }
-                sh '''
-                cd lua
 
-                export LC_ALL=en_US.UTF-8
-                export LANG=en_US.UTF-8
-
-                svn add . --no-ignore --force
-                svn ci . -m "Auto Commit By $c_name"
-
-                svn st | grep ^! | awk '{print $2}' | xargs svn rm
-                svn ci . -m "Auto Commit By $c_name, Remove Files"
-                '''
             }
         }
         stage('Update Server') {
