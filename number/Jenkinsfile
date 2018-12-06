@@ -69,8 +69,10 @@ pipeline {
                         environment {
                             LocalizedName = "$c_name"
                         }
+                        echo ${env.BUILD_NUMBER}
+                        echo ${env.LocalizedName}
                     }
-                    sh '''#!/bin/bash -xe\n
+                    sh '''#!/bin/bash -xe
                     #必须先声明
                     echo $name
                     
