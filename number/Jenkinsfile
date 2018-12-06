@@ -80,7 +80,7 @@ pipeline {
                     }
                     sh '''#!/bin/bash -xe
                     #必须先声明
-                    echo $name
+                    echo "$c_name"
                     echo "${BUILD_NUMBER}"
                     echo "${LocalizedName}"
 //                    out_path=$(pwd)/lua
