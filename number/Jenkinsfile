@@ -57,11 +57,10 @@ pipeline {
 //                    sh 'pwd'
 //                }
 
-                script{
 
-                    def props = readJSON file: 'name.json'
-                    echo props['$name']
-                }
+                def props = readJSON file: 'name.json'
+                echo props['$name']
+
                 sh '''
                 set +x
                 echo "开始导表"
