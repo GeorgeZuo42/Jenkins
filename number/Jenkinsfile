@@ -16,6 +16,7 @@ pipeline {
     //3. Environment variables
     environment {
         CheckOutDir = 'number'
+        LUA='/usr/local/bin/lua5.1'
     }
     //4. Stages
     stages {
@@ -90,7 +91,7 @@ pipeline {
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     sh '''
                         cd lua
-                        find ./common -name "*.lua" -type f -exec lua {} \\;
+                        find ./common -name "*.lua" -type f -exec $LUA {} \\;
                         
                         
                         export LC_ALL=en_US.UTF-8
