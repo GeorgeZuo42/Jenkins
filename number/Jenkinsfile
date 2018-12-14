@@ -81,10 +81,17 @@ pipeline {
                     ansiColor('xterm') {
                         sh '$(pwd)/Tools/Mac64/run-2lua.sh'
                     }
-
+                }
+            }
+        }
+        stage('Check Excel') {
+            steps {
+                echo "开始导表"
+                dir("${env.WORKSPACE}/$CheckOutDir") {
                     sh '''
+                        find ./common -name "*.lua" -type f -exec lua {} \\;
                         cd lua
-    
+                        
                         export LC_ALL=en_US.UTF-8
                         export LANG=en_US.UTF-8
     
