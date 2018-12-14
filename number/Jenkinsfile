@@ -89,8 +89,9 @@ pipeline {
                 echo "开始导表"
                 dir("${env.WORKSPACE}/$CheckOutDir") {
                     sh '''
-                        find ./common -name "*.lua" -type f -exec lua {} \\;
                         cd lua
+                        find ./common -name "*.lua" -type f -exec lua {} \\;
+                        
                         
                         export LC_ALL=en_US.UTF-8
                         export LANG=en_US.UTF-8
