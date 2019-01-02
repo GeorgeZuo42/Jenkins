@@ -16,7 +16,7 @@ pipeline {
     //3. Environment variables
     environment {
         CheckOutDir = 'number'
-        LUA='/usr/local/bin/lua5.1'
+        LUA = '/usr/local/bin/lua5.1'
     }
     //4. Stages
     stages {
@@ -89,7 +89,7 @@ pipeline {
             steps {
                 echo "开始导表"
                 dir("${env.WORKSPACE}/$CheckOutDir") {
-                    sh '''/bin/sh -xe 
+                    sh '''/bin/sh -xe
                         cd lua
                         find ./common -name "*.lua" -type f -print0 | xargs -0 -n1 $LUA
                         
@@ -110,8 +110,8 @@ pipeline {
             steps {
                 echo "更新服务器"
                 script {
-                    sh 'curl -sS --request PUT http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-                    sh 'curl -sS --request POST http://192.168.50.90:8081/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+                    sh 'curl -sS --request PUT http://192.168.50.90:8887/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
+                    sh 'curl -sS --request POST http://192.168.50.90:8887/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
                 }
             }
         }
