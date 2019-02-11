@@ -106,15 +106,6 @@ pipeline {
                 }
             }
         }
-        stage('Update Server') {
-            steps {
-                echo "更新服务器"
-                script {
-                    sh 'curl -sS --request PUT http://192.168.50.90:8887/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-                    sh 'curl -sS --request POST http://192.168.50.90:8887/api/game/system/reload/5a37b3a5f1c27c0b88a240e9'
-                }
-            }
-        }
         stage('Set Name') {
             steps {
                 script {
